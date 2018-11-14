@@ -26,8 +26,8 @@ import config
 # message.send('string')    string を送信
 # message.react('icon_emoji')  発言者のメッセージにリアクション(スタンプ)する
 #                               文字列中に':'はいらない
-TOKEN = config.TOKEN
-CHANNEL = config.CHANNEL
+TOKEN = 'xoxb-210942189015-460024145077-PqbOl0eWncKO2v8ZR7kItKbs'
+CHANNEL = 'CD1MWCWJK'
 
 @respond_to('もふもふ')
 def mention_func(message):
