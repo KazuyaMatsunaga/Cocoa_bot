@@ -9,3 +9,5 @@
 
 
 ・他にも発言をすると様々なリアクションをとってくれます．
+
+![img_7447](https://user-images.githubusercontent.com/38418653/48751539-40d33d00-ecc8-11e8-8df8-fcc4e9739592.jpg)
