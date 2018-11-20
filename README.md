@@ -7,7 +7,7 @@
 ![img_7361](https://user-images.githubusercontent.com/38418653/48751534-3a44c580-ecc8-11e8-94cd-bb71fd1e902f.jpg)
 ![img_7449](https://user-images.githubusercontent.com/38418653/48751537-3d3fb600-ecc8-11e8-94f7-a280375c7586.jpg)
 
-
+#　　その他
 ・他にも発言をすると様々なリアクションをとってくれます．
 
 ![img_7447](https://user-images.githubusercontent.com/38418653/48751539-40d33d00-ecc8-11e8-8df8-fcc4e9739592.jpg)
