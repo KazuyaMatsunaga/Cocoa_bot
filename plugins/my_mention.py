@@ -55,6 +55,16 @@ def mention_func(message):
 def mention_func(message):
     message.send('(`0言0́*)<ヴェアアアアアアアアアアアアアア')
     message.react('broken_heart')
+    imagefile_path = 'plugins/images/veaa/veaa.gif' # 画像ファイルのパスを代入
+    filepath = os.path.abspath(imagefile_path)
+    # 画像の投稿
+    files = {'file': open(filepath, 'rb')}
+    param = {
+        'token':TOKEN,
+        'channels':CHANNEL,
+        'title': "img"
+    }
+    requests.post(url="https://slack.com/api/files.upload",params=param, files=files)
 
 @listen_to('ランチ食べたい')
 def listen_func(message):
@@ -63,3 +73,19 @@ def listen_func(message):
     lunch_list = ["一平ソバ","東館食堂","旧スエヒロ食堂","松屋","がんま","高園","モンスン"]
     text = '今日は' + random.choice(lunch_list) + 'に行こう！！☆'
     message.reply(text)
+    imagefile_list = ['plugins/images/lunch/lunch_1.gif',
+                      'plugins/images/lunch/lunch_2.gif',
+                      'plugins/images/lunch/lunch_3.gif',
+                      'plugins/images/lunch/lunch_4.gif',
+                      'plugins/images/lunch/lunch_5.gif',
+                      'plugins/images/lunch/lunch_6.gif',
+                      'plugins/images/lunch/lunch_7.gif'] # 画像ファイルのパスを代入
+    filepath = os.path.abspath(random.choice(imagefile_list))
+    # 画像の投稿
+    files = {'file': open(filepath, 'rb')}
+    param = {
+        'token':TOKEN,
+        'channels':CHANNEL,
+        'title': "img"
+    }
+    requests.post(url="https://slack.com/api/files.upload",params=param, files=files)
