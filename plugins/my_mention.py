@@ -7,6 +7,8 @@ from slackbot.bot import default_reply  # 該当する応答がない場合に�
 import random
 import json
 import requests
+from slacker import Slacker
+import os
 import sys
 sys.path.append('..')
 import config
@@ -28,11 +30,26 @@ import config
 #                               文字列中に':'はいらない
 TOKEN = config.TOKEN
 CHANNEL = config.CHANNEL
+C_NAME = config.CHANNEL_NAME
 
 @respond_to('もふもふ')
 def mention_func(message):
     message.reply('もふもふ！☆') # メンション
     message.react('mofumofu')
+    imagefile_list = ['plugins/images/mofumofu/mofumofu_1.gif',
+                      'plugins/images/mofumofu/mofumofu_2.gif',
+                      'plugins/images/mofumofu/mofumofu_3.gif',
+                      'plugins/images/mofumofu/mofumofu_4.gif',
+                      'plugins/images/mofumofu/mofumofu_5.gif'] # 画像ファイルのパスを代入
+    filepath = os.path.abspath(random.choice(imagefile_list))
+    # 画像の投稿
+    files = {'file': open(filepath, 'rb')}
+    param = {
+        'token':TOKEN,
+        'channels':CHANNEL,
+        'title': "img"
+    }
+    requests.post(url="https://slack.com/api/files.upload",params=param, files=files)
 
 @respond_to('ブス')
 def mention_func(message):

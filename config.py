@@ -1,2 +1,3 @@
 TOKEN = 'xoxb-210942189015-460024145077-PqbOl0eWncKO2v8ZR7kItKbs'
 CHANNEL = 'CD1MWCWJK'
+CHANNEL_NAME = 'is_the_order_a_lunch_'
