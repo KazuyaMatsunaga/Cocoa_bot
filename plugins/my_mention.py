@@ -12,6 +12,8 @@ import os
 import sys
 sys.path.append('..')
 import config
+import schedule
+import time
 
 # @respond_to('string')     bot宛のメッセージ
 #                           stringは正規表現が可能 「r'string'」
@@ -89,3 +91,34 @@ def listen_func(message):
         'title': "img"
     }
     requests.post(url="https://slack.com/api/files.upload",params=param, files=files)
+
+#以下定期的に画像を投稿する処理
+def image_post_job():
+    imagefile_list = ['plugins/images/mofumofu/mofumofu_1.gif',
+                      'plugins/images/mofumofu/mofumofu_2.gif',
+                      'plugins/images/mofumofu/mofumofu_3.gif',
+                      'plugins/images/mofumofu/mofumofu_4.gif',
+                      'plugins/images/mofumofu/mofumofu_5.gif',
+                      'plugins/images/lunch/lunch_1.gif',
+                      'plugins/images/lunch/lunch_2.gif',
+                      'plugins/images/lunch/lunch_3.gif',
+                      'plugins/images/lunch/lunch_4.gif',
+                      'plugins/images/lunch/lunch_5.gif',
+                      'plugins/images/lunch/lunch_6.gif',
+                      'plugins/images/lunch/lunch_7.gif'] # 画像ファイルのパスを代入
+    filepath = os.path.abspath(random.choice(imagefile_list))
+    # 画像の投稿
+    files = {'file': open(filepath, 'rb')}
+    param = {
+        'token':TOKEN,
+        'channels':CHANNEL,
+        'title': "img"
+    }
+    requests.post(url="https://slack.com/api/files.upload",params=param, files=files)
+
+#AM7:30に画像を投稿
+schedule.every().day.at("7:30").do(image_post_job)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
