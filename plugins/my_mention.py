@@ -12,8 +12,6 @@ import os
 import sys
 sys.path.append('..')
 import config
-import schedule
-import time
 
 # @respond_to('string')     bot宛のメッセージ
 #                           stringは正規表現が可能 「r'string'」
