@@ -6,7 +6,7 @@
 
 ![img_7361](https://i.imgur.com/UhjYR23.gif)
 
-また擬似的な会話もすることができます．
+[2019/1/27追記]擬似的な会話機能を追加しました．
 ![img_com](https://i.imgur.com/AUyeANx.png)
 ![img_comgif](https://i.imgur.com/mT9yBO2.gif)
 
