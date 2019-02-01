@@ -8,6 +8,7 @@
 
 また擬似的な会話もすることができます．
 ![img_com](https://i.imgur.com/AUyeANx.png)
+![img_comgif](https://i.imgur.com/mT9yBO2.gif)
 
 
 ## その他隠しコマンド
