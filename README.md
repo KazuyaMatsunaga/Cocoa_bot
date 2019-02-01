@@ -4,8 +4,7 @@
 ## 主な機能
 ・「ランチ食べたい」と入力するとその日のランチを決めてくれます．
 
-![img_7361](https://user-images.githubusercontent.com/38418653/48751534-3a44c580-ecc8-11e8-94cd-bb71fd1e902f.jpg)
-![img_7449](https://user-images.githubusercontent.com/38418653/48751537-3d3fb600-ecc8-11e8-94f7-a280375c7586.jpg)
+![img_7361](https://i.imgur.com/UhjYR23.gif)
 
 また擬似的な会話もすることができます．
 ![img_com](https://i.imgur.com/AUyeANx.png)
