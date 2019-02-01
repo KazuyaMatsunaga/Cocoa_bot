@@ -14,8 +14,8 @@
 ## その他隠しコマンド
 ・他にも発言をすると様々なリアクションをとってくれます．
 
-![img_7447](https://user-images.githubusercontent.com/38418653/48751539-40d33d00-ecc8-11e8-8df8-fcc4e9739592.jpg)
-![img_7446](https://user-images.githubusercontent.com/38418653/48751541-429d0080-ecc8-11e8-8c38-aab0f811cc8f.jpg)
+![img_7447](https://i.imgur.com/Vt1lU5C.gif)
+![img_7446](https://i.imgur.com/1aN9hav.gif)
 
 
 
