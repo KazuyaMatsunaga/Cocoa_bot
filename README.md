@@ -5,7 +5,7 @@
 ・「ランチ食べたい」と入力するとその日のランチを決めてくれます．
 ()
 
-[Imgur](https://i.imgur.com/XRCo0Wl.png)
+![Imgur](https://i.imgur.com/XRCo0Wl.png)
 
 
 ## その他隠しコマンド
