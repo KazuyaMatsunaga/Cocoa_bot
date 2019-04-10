@@ -87,44 +87,84 @@ def busu(message):
     }
     requests.post(url="https://slack.com/api/files.upload",params=param, files=files)
 
-@listen_to('ランチ食べたい')
+@respond_to('ランチ食べたい')
 def lunch(message):
-    message.send('ご注文はランチですか？')
     message.react('heart')
-    lunch_list = ["一平ソバ","東館食堂","旧スエヒロ食堂","松屋","がんま","高園","モンスン"]
-    text = '今日は' + random.choice(lunch_list) + 'に行こう！！☆'
-    message.reply(text)
-    imagefile_list = ['plugins/images/lunch/lunch_1.gif',
-                      'plugins/images/lunch/lunch_2.gif',
-                      'plugins/images/lunch/lunch_3.gif',
-                      'plugins/images/lunch/lunch_4.gif',
-                      'plugins/images/lunch/lunch_5.gif',
-                      'plugins/images/lunch/lunch_6.gif',
-                      'plugins/images/lunch/lunch_7.gif'] # 画像ファイルのパスを代入
-    filepath = os.path.abspath(random.choice(imagefile_list))
-    # 画像の投稿
-    files = {'file': open(filepath, 'rb')}
-    param = {
-        'token':TOKEN,
-        'channels':CHANNEL,
-        'title': "img"
-    }
-    requests.post(url="https://slack.com/api/files.upload",params=param, files=files)
+    message.send('ご注文はランチですか？\n')
+    message.reply('現在地を教えてね！')
 
-# 自然対話コード
-@respond_to(r'.*')
-def chatting(message):
-    send_text = message.body['text'] # メッセージを取り出す
+    @listen_to(r'[^0-9]')
+    def place_question(message):
+        place = message.body['text'] # メッセージを取り出す
+        message.reply(place + 'だね！料理のジャンルは何にしようか？')
+        @listen_to(r'[^0-9]')
+        def genre_question(message):
+            genre = message.body['text'] # メッセージを取り出す
+            message.reply(genre + 'だね！予算はどれくらいがいいかな？\n' + '下の中から好きなのを選んでね！(番号で答えてね)\n')
+            message.send('1:～500円\n')
+            message.send('2:501～1000円\n')
+            message.send('3:1001～1500円\n')
+            @listen_to(r'[1-3]')
+            def budget_question(message):
+                budget_number = message.body['text'] # メッセージを取り出す
+                message.reply('OK！ちょっと待っててね！')
+                # ここから検索処理
 
-    send_data['voiceText'] = send_text
-    # 送信時間を取得
-    send_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    send_data['appSendTime'] = send_time
+                # 予算コードを取得
+                hotpepper_gourmet_budget_url = "http://webservice.recruit.co.jp/hotpepper/budget/v1/?key=" + HOTPEPPER_GOURMET_APIKEY + "&" + "format=" + "json"
+                return_gourmet_budget = requests.get(hotpepper_gourmet_budget_url).json()
 
-    # メッセージを送信
-    r = requests.post(url, data=json.dumps(send_data), headers=headers)
-    # レスポンスデータから返答内容を取得
-    return_data = r.json()
-    return_message = return_data['systemText']['expression']
-    # 返答を投稿
-    message.send(return_message)
+                print(return_gourmet_budget)
+
+                gourmet_budget_list = return_gourmet_budget['results']['budget']
+
+                if budget_number == "1":
+                    gourmet_budget_code = gourmet_budget_list[0]['code']
+                elif budget_number == "2":
+                    gourmet_budget_code = gourmet_budget_list[1]['code']
+                elif budget_number == "3":
+                    gourmet_budget_code = gourmet_budget_list[2]['code']
+
+                print(gourmet_budget_code)
+                
+                # リクエストURL
+                hotpepper_gourmet_url = "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=" + HOTPEPPER_GOURMET_APIKEY + "&" + "keyword=" + place + " " + genre + "&" + "budget=" + gourmet_budget_code+ "&" + "lunch=" + "1" + "&" + "format=" + "json" + "&" + "type=" + "lite"
+
+                return_gourmet = requests.get(hotpepper_gourmet_url).json()
+
+                print(return_gourmet)
+
+                choiced_gourmet_name = None
+                choiced_gourmet_urls = None
+
+                if return_gourmet['results']['shop'] != []:
+                    return_gourmet_list = return_gourmet['results']['shop']
+                    choiced_gourmet = random.choice(return_gourmet_list)
+                    choiced_gourmet_name = choiced_gourmet['name']
+                    choiced_gourmet_urls = choiced_gourmet['urls']['pc']
+                # ここまで検索処理
+
+                if (choiced_gourmet_name is not None) and (choiced_gourmet_urls is not None):
+                    message.reply('このお店はどうかな？\n' + choiced_gourmet_name + "\n" + choiced_gourmet_urls)
+                else:
+                    message.reply('いいお店が見つからなかった...ごめんね...')
+                
+                @respond_to('ありがとう')
+                def thank_you_response(message):
+                    imagefile_list = ['plugins/images/lunch/lunch_1.gif',
+                                    'plugins/images/lunch/lunch_2.gif',
+                                    'plugins/images/lunch/lunch_3.gif',
+                                    'plugins/images/lunch/lunch_4.gif',
+                                    'plugins/images/lunch/lunch_5.gif',
+                                    'plugins/images/lunch/lunch_6.gif',
+                                    'plugins/images/lunch/lunch_7.gif'] # 画像ファイルのパスを代入
+                    filepath = os.path.abspath(random.choice(imagefile_list))
+                    files = {'file': open(filepath, 'rb')}
+                    param = {
+                        'token':TOKEN,
+                        'channels':CHANNEL,
+                        'title': "img"
+                    }
+                    message.react('heart')
+                    message.reply('うん！どういたしまして！')
+                    requests.post(url="https://slack.com/api/files.upload",params=param, files=files)
