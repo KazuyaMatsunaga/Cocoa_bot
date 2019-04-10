@@ -14,5 +14,10 @@
 ![img_7447](https://i.imgur.com/Vt1lU5C.gif)
 ![img_7446](https://i.imgur.com/1aN9hav.gif)
 
+## ToDo
+
+- 以前出力されたお店の情報が、入力の情報に関わらずまた出力されてしまう不具合の修正
+
+
 
 
